@@ -7,11 +7,20 @@ class Form extends Component {
         this.props.updateTask(value);
     };
 
+    handleKeyPress = (event) => {
+        if(event.key === 'Enter'){
+
+            this.props.addTodos();
+        }
+    };
+
     render () {
 
         return (
             <>
-                <input type="text" onChange={ this.onInputChange } value={ this.props.content } placeholder='type mew task'/>
+                <input type="text" onChange={ this.onInputChange } onKeyPress={ this.handleKeyPress }
+                       value={ this.props.content } placeholder='type mew task' autoFocus
+                />
                 <button onClick={ this.props.addTodos }>Add Task</button>
             </>
         )

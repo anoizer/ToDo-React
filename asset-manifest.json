@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/anoizer/static/css/main.d4684252.chunk.css",
+    "main.js": "/anoizer/static/js/main.7151aa87.chunk.js",
+    "main.js.map": "/anoizer/static/js/main.7151aa87.chunk.js.map",
+    "runtime~main.js": "/anoizer/static/js/runtime~main.8d045050.js",
+    "runtime~main.js.map": "/anoizer/static/js/runtime~main.8d045050.js.map",
+    "static/js/2.6b954787.chunk.js": "/anoizer/static/js/2.6b954787.chunk.js",
+    "static/js/2.6b954787.chunk.js.map": "/anoizer/static/js/2.6b954787.chunk.js.map",
+    "index.html": "/anoizer/index.html",
+    "precache-manifest.0c158d8410f2fe10dd53f0929f4ab962.js": "/anoizer/precache-manifest.0c158d8410f2fe10dd53f0929f4ab962.js",
+    "service-worker.js": "/anoizer/service-worker.js",
+    "static/css/main.d4684252.chunk.css.map": "/anoizer/static/css/main.d4684252.chunk.css.map"
+  }
+}

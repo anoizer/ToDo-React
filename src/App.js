@@ -40,10 +40,10 @@ class App extends Component {
       const newTask = {id: index, content: this.state.content};
 
       if(this.state.content) {
-          this.setState({todos: [...this.state.todos, newTask]});
+          this.setState({todos: [...this.state.todos, newTask], content: ''});
 
 
-          this.setState({content: ''});
+          // this.setState({content: ''});
 
           // console.log('addedstate: ', this.state.todos);
 
@@ -53,9 +53,7 @@ class App extends Component {
   };
 
   deleteTodo = (id) => {
-      const filteredTodos = this.state.todos.filter(todo => {
-          return todo.id !== id
-      });
+      const filteredTodos = this.state.todos.filter(todo => { return todo.id !== id });
       this.setState({todos: filteredTodos});
 
       //cookie set

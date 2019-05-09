@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import Form from './components/Form'
 import TodosList from './components/TodosList'
-import Cookies from 'universal-cookie'
+// import Cookies from 'universal-cookie'
 
 
-const cookies = new Cookies();
+// const cookies = new Cookies();
+// const myStorage = window.localStorage;
 
 class App extends Component {
 
@@ -14,62 +15,58 @@ class App extends Component {
         this.state = {
             content: '',
 
-            todos: cookies.get('myCookies') ? cookies.get('myCookies') : [
-                // {id: 1, content: 'understand React'},
-                // {id: 2, content: 'write to-do-list'}
-            ]
+            //state todos with localStorage
+            todos: localStorage.getItem('storeObj') ? JSON.parse(localStorage.getItem('storeObj')) : []
+
+            // state todos with cookies
+            // todos: cookies.get('myCookies') ? cookies.get('myCookies') : []
+            //     // {id: 1, content: 'understand React'},
+            //     // {id: 2, content: 'write to-do-list'}
         };
     }
 
-    cookiesSet = () => {
-        // console.log('cookies: ',cookies.get('myCookies'));
-        // console.log('state: ', this.state.todos);
-        // console.log(cookies.get('myCookies').length);
-
-        cookies.set('myCookies', this.state.todos, {path: '/'});
-
-        // this.setState({todos: cookies.get('myCookies')});
-    };
-
-  updateTask = (value) => {
-      this.setState({content: value})
+  updateInputField = (content) => {
+      this.setState({ content })
   };
 
-  addTodos = () => {
+  addTodoItem = () => {
       const index = Math.random().toString(36).substr(2, 16);
       const newTask = {id: index, content: this.state.content};
 
       if(this.state.content) {
-          this.setState({todos: [...this.state.todos, newTask]});
+          this.setState({todos: [...this.state.todos, newTask], content: ''});
 
+          // localStorage
+          setTimeout(() => localStorage.setItem('storeObj', JSON.stringify(this.state.todos)), 1000);
 
-          this.setState({content: ''});
-
-          // console.log('addedstate: ', this.state.todos);
-
-          //cookie set
-          this.cookiesSet()
+          //cookie
+          // setTimeout(() => cookies.set('myCookies', this.state.todos, {path: '/'}), 1000);
       }
   };
 
-  deleteTodo = (id) => {
-      const filteredTodos = this.state.todos.filter(todo => {
-          return todo.id !== id
-      });
+  deleteTodoItem = (currentId) => {
+      // const { todos } = this.state;
+
+      const filteredTodos = this.state.todos.filter( ({ id }) => id !== currentId );
       this.setState({todos: filteredTodos});
 
-      //cookie set
-      // this.cookiesSet();
+      // localStorage
+      setTimeout(() => localStorage.setItem('storeObj', JSON.stringify(this.state.todos)), 1000);
+
+      //cookie
+      // setTimeout(() => cookies.set('myCookies', this.state.todos, {path: '/'}), 1000);
   };
 
   render () {
+      const { content, todos } = this.state;
+
       return (
           <div className="App">
             <div>
-                <Form content = {this.state.content} updateTask = { this.updateTask } addTodos = { this.addTodos }/>
+                <Form content = { content } updateInputField = { this.updateInputField } addTodoItem = { this.addTodoItem }/>
             </div>
             <div className='list'>
-                <TodosList todos = { this.state.todos } deleteTodo = { this.deleteTodo }/>
+                <TodosList todos = { todos } deleteTodoItem = { this.deleteTodoItem }/>
             </div>
           </div>
       )

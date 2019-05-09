@@ -3,25 +3,26 @@ import React, { Component } from 'react'
 class Form extends Component {
 
 
-    onInputChange = ({ target: { value } }) => {
-        this.props.updateTask(value);
+    onInputChange = ({ target: { value: content } }) => {
+        this.props.updateInputField(content);
     };
 
     handleKeyPress = (event) => {
         if(event.key === 'Enter'){
 
-            this.props.addTodos();
+            this.props.addTodoItem();
         }
     };
 
     render () {
+        const { content, addTodoItem } =  this.props;
 
         return (
             <>
                 <input type="text" onChange={ this.onInputChange } onKeyPress={ this.handleKeyPress }
-                       value={ this.props.content } placeholder='type mew task' autoFocus
+                       value={ content } placeholder='type mew task' autoFocus
                 />
-                <button onClick={ this.props.addTodos }>Add Task</button>
+                <button onClick={ addTodoItem }>Add Task</button>
             </>
         )
     }

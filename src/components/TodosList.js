@@ -4,16 +4,15 @@ import React, { Component } from 'react'
 class TodosList extends Component {
 
     showTasks = () => {
-        return this.props.todos.map(todo => {
-            return (
-                <div key = { todo.id.toString() }>
-                    <span onClick={ () => { this.props.deleteTodo(todo.id) }}>
-                        { todo.content }
+        const { todos, deleteTodoItem } = this.props;
+
+        return todos.map( ({ id, content}) =>
+                <div key = { id.toString() }>
+                    <span onClick={ () => deleteTodoItem(id) }>
+                        { content }
                     </span>
                 </div>
-            )
-        })
-
+        )
     };
 
     showEmpty = () => {
@@ -22,16 +21,16 @@ class TodosList extends Component {
         )
     };
 
-    todoList = () => {
-        return this.props.todos.length ?
-            this.showTasks() :
-            this.showEmpty()
-    };
+    // todoList = () => {
+    //     return this.props.todos.length ?
+    //         this.showTasks() :
+    //         this.showEmpty()
+    // };
 
     render () {
         return (
             <div className='list-wrapper'>
-                { this.todoList() }
+                { this.props.todos.length ? this.showTasks() : this.showEmpty() }
             </div>
         )
     }
